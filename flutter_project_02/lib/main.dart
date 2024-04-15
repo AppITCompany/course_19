@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -47,19 +48,15 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      san--;
-                    });
-                  },
+                  onPressed: remove,
                   icon: const Icon(Icons.remove),
                   label: const Text('Decrement'),
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
-                    setState(() {
-                      san++;
-                    });
+                    if (kDebugMode) {
+                      print('Salam');
+                    }
                   },
                   icon: const Icon(Icons.add),
                   label: const Text('Increment'),
@@ -70,5 +67,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void remove() {
+    setState(() {
+      san++;
+    });
   }
 }
