@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_application_10_piano_app/components/small_keyboard.dart';
 
 import '../components/piano_keyboard_item.dart';
 
@@ -25,24 +25,26 @@ class _HomePageState extends State<HomePage> {
       body: RawScrollbar(
         controller: _controller,
         thumbVisibility: true,
-        thumbColor: Colors.blue,
-        radius: const Radius.circular(8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+          side: const BorderSide(
+            color: Color.fromARGB(255, 97, 73, 70),
+            width: 2,
+          ),
+        ),
         scrollbarOrientation: ScrollbarOrientation.top,
         thickness: 50,
         child: Column(
           children: [
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                child: const Row(
-                  children: [
-                    PianoKeyboardItem(),
-                  ],
-                ),
+            Container(
+              height: 50,
+              color: const Color.fromARGB(255, 114, 88, 83),
+              child: const Opacity(
+                opacity: 0.9,
+                child: SmappKeyboard(),
               ),
             ),
             Expanded(
-              flex: 6,
               child: ListView(
                 controller: _controller,
                 scrollDirection: Axis.horizontal,
