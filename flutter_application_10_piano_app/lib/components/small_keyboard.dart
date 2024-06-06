@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SmappKeyboard extends StatelessWidget {
   const SmappKeyboard({super.key});
@@ -25,9 +26,9 @@ class SmallKeyboardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
+    return Stack(
       children: [
-        Row(
+        const Row(
           children: [
             SmallWhiteButton(),
             SmallWhiteButton(),
@@ -40,16 +41,16 @@ class SmallKeyboardItem extends StatelessWidget {
         ),
         Row(
           children: [
-            SizedBox(width: 12),
-            SmallBlackButton(),
-            SizedBox(width: 4),
-            SmallBlackButton(),
-            SizedBox(width: 23),
-            SmallBlackButton(),
-            SizedBox(width: 4.5),
-            SmallBlackButton(),
-            SizedBox(width: 4.5),
-            SmallBlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.009999),
+            const SmallBlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.001999),
+            const SmallBlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.020),
+            const SmallBlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.001999),
+            const SmallBlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.001999),
+            const SmallBlackButton(),
           ],
         ),
       ],
@@ -63,9 +64,9 @@ class SmallWhiteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 17,
-      height: 40,
-      margin: const EdgeInsets.symmetric(horizontal: 1),
+      width: (MediaQuery.of(context).size.width / 49) - 0.8.sp,
+      height: MediaQuery.of(context).size.height * 0.1,
+      margin: EdgeInsets.symmetric(horizontal: 0.4.sp),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -83,9 +84,9 @@ class SmallBlackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 12.7,
-      height: 25,
-      margin: const EdgeInsets.symmetric(horizontal: 1),
+      width: ((MediaQuery.of(context).size.width / 49) - 0.8.sp) * 0.95,
+      height: (MediaQuery.of(context).size.height * 0.1) * 0.65,
+      margin: EdgeInsets.symmetric(horizontal: 0.4.sp),
       decoration: const BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.only(

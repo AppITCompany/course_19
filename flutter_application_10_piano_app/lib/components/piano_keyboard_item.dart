@@ -8,9 +8,9 @@ class PianoKeyboardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
+    return Stack(
       children: [
-        Row(
+        const Row(
           children: [
             WhiteButton(),
             WhiteButton(),
@@ -23,16 +23,16 @@ class PianoKeyboardItem extends StatelessWidget {
         ),
         Row(
           children: [
-            SizedBox(width: 52),
-            BlackButton(),
-            SizedBox(width: 15),
-            BlackButton(),
-            SizedBox(width: 100),
-            BlackButton(),
-            SizedBox(width: 15),
-            BlackButton(),
-            SizedBox(width: 15),
-            BlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.053),
+            const BlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.013),
+            const BlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.103),
+            const BlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.0132),
+            const BlackButton(),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.0134),
+            const BlackButton(),
           ],
         ),
       ],

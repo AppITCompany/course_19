@@ -33,14 +33,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         scrollbarOrientation: ScrollbarOrientation.top,
-        thickness: 50,
+        thickness: MediaQuery.of(context).size.height * 0.12,
         child: Column(
           children: [
             Container(
-              height: 50,
+              height: MediaQuery.of(context).size.height * 0.12,
               color: const Color.fromARGB(255, 114, 88, 83),
               child: const Opacity(
-                opacity: 0.9,
+                opacity: 0.6,
                 child: SmappKeyboard(),
               ),
             ),
