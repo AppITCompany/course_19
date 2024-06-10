@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BlackButton extends StatelessWidget {
-  const BlackButton({super.key});
+  const BlackButton({
+    required this.text,
+    super.key,
+  });
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +20,9 @@ class BlackButton extends StatelessWidget {
           onPressed: () {},
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.zero,
+            textStyle: const TextStyle(fontSize: 12),
             elevation: 5,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -23,7 +31,16 @@ class BlackButton extends StatelessWidget {
               ),
             ),
           ),
-          child: const SizedBox(),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Text(text, maxLines: 1),
+              ),
+            ),
+          ),
         ),
       ),
     );

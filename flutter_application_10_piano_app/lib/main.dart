@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_soloud/flutter_soloud.dart';
 
 import 'home/home_page.dart';
 
-void main() {
+final soloud = SoLoud.instance;
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
+
+  await soloud.init();
 
   runApp(const MyApp());
 }
