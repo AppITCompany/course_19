@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_10_piano_app/main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BlackButton extends StatelessWidget {
   const BlackButton({
     required this.text,
+    required this.soundPath,
     super.key,
   });
 
   final String text;
+  final String soundPath;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,10 @@ class BlackButton extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 1.sp),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            final source = await soloud.loadAsset('assets/sounds/$soundPath');
+            await soloud.play(source);
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
             foregroundColor: Colors.white,

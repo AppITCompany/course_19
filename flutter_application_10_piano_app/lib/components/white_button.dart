@@ -5,10 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class WhiteButton extends StatelessWidget {
   const WhiteButton({
     required this.text,
+    required this.soundPath,
     super.key,
   });
 
   final String text;
+  final String soundPath;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +21,14 @@ class WhiteButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 1.sp),
         child: ElevatedButton(
           onPressed: () async {
-            final source = await soloud.loadAsset('assets/sounds/$text');
+            final source = await soloud.loadAsset('assets/sounds/$soundPath');
             await soloud.play(source);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             shadowColor: Colors.black,
+            padding: EdgeInsets.zero,
             elevation: 5,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -38,7 +41,10 @@ class WhiteButton extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 8),
-              child: Text(text),
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Text(text),
+              ),
             ),
           ),
         ),
