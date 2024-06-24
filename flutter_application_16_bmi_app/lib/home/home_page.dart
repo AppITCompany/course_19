@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_16_bmi_app/components/gender_card.dart';
 import 'package:flutter_application_16_bmi_app/components/height_card.dart';
@@ -11,11 +13,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isMale = true;
+  int height = 175;
+  int weight = 60;
+  int age = 25;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI CALCULATOR'),
+        title: Text('Дене салмагынын индекси'.toUpperCase()),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -28,45 +35,66 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: GenderCard(
                     icon: Icons.male,
-                    isActive: true,
-                    text: 'MALE',
-                    onTap: () {},
+                    isActive: isMale,
+                    text: 'ЭРКЕК',
+                    onTap: () {
+                      isMale = true;
+                      setState(() {});
+                    },
                   ),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
                   child: GenderCard(
                     icon: Icons.female,
-                    text: 'FEMALE',
-                    isActive: false,
-                    onTap: () {},
+                    text: 'АЯЛ',
+                    isActive: !isMale,
+                    onTap: () {
+                      isMale = false;
+                      setState(() {});
+                    },
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 20),
             HeightCard(
-              value: 180,
-              onChanged: (v) {},
+              value: height.toDouble(),
+              onChanged: (v) {
+                height = v.toInt();
+                setState(() {});
+              },
             ),
             const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
                   child: ValueModifierCard(
-                    modifierName: 'WEIGHT',
-                    modifierValue: 60,
-                    onDecrement: () {},
-                    onIncrement: () {},
+                    modifierName: 'САЛМАК',
+                    modifierValue: weight,
+                    onDecrement: () {
+                      weight--;
+                      setState(() {});
+                    },
+                    onIncrement: () {
+                      weight++;
+                      setState(() {});
+                    },
                   ),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
                   child: ValueModifierCard(
-                    modifierName: 'AGE',
-                    modifierValue: 28,
-                    onDecrement: () {},
-                    onIncrement: () {},
+                    modifierName: 'ЖАШ',
+                    modifierValue: age,
+                    onDecrement: () {
+                      age--;
+                      setState(() {});
+                    },
+                    onIncrement: () {
+                      age++;
+                      setState(() {});
+                    },
                   ),
                 ),
               ],
@@ -75,13 +103,105 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('CALCULATE'),
+                onPressed: _calculate,
+                child: const Text('ЭСЕПТӨӨ'),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  void _calculate() {
+    final heightInMeters = height / 100;
+    final bmi = weight / (heightInMeters * heightInMeters);
+    log(bmi.toString());
+    _showDialog(bmi.toInt());
+  }
+
+  String getTitle(int bmi) {
+    if (bmi < 18.5) {
+      return 'Ээх бир аз арык экенсиз';
+    } else if (bmi < 25) {
+      return 'Азаматсыз!!!';
+    } else if (bmi < 30) {
+      return 'Ашыкча салмагыңыз бар';
+    } else {
+      return 'Ашыкча салмагыңыз бар...';
+    }
+  }
+
+  String getDescription(int bmi) {
+    if (bmi < 18.5) {
+      return 'Пайдалуу тамактанып ден-соолукка кам көрүңүз. Сиздин индексиңиз: $bmi';
+    } else if (bmi < 25) {
+      return 'Идеалдуу экенсиз! Ушунуңуздан жазбаңыз. Сиздин индексиңиз: $bmi';
+    } else if (bmi < 30) {
+      return 'Элдер укса эмне дейт. Спортко тез арада кайтыңыз. Сиздин индексиңиз: $bmi';
+    } else {
+      return 'Келиңиз чогуу Спортко кайталы. Биринчи байлык ден-соолук!';
+    }
+  }
+
+  String getEmoji(int bmi) {
+    if (bmi < 18.5) {
+      return '😕';
+    } else if (bmi < 25) {
+      return '🥳';
+    } else if (bmi < 30) {
+      return '🤓';
+    } else {
+      return '😲';
+    }
+  }
+
+  void _showDialog(int bmi) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog.adaptive(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: Text(
+            getTitle(bmi),
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          content: Column(
+            children: [
+              Text(
+                getEmoji(bmi),
+                style: const TextStyle(
+                  fontSize: 60,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                getDescription(bmi),
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Макул'),
+            ),
+          ],
+        );
+      },
+    );
+
+    isMale = true;
+    height = 175;
+    weight = 60;
+    age = 25;
+    setState(() {});
   }
 }

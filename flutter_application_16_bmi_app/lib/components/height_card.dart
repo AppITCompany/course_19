@@ -18,7 +18,7 @@ class HeightCard extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'HEIGHT',
+              'БОЙ',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -37,7 +37,7 @@ class HeightCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'cm',
+                  'см',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
