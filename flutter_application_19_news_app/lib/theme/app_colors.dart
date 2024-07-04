@@ -9,4 +9,5 @@ class AppColors {
   static const secondaryText = Color(0xff9A938C);
   static const tertiaryText = Color(0xff303345);
   static const fourthText = Color(0xff9C9EAA);
+  static const white = Color(0xffFFFFFF);
 }
