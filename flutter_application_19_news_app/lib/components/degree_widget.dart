@@ -20,34 +20,40 @@ class DegreeWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SvgPicture.asset(
-          iconPath,
-          height: 230,
+        Expanded(
+          flex: 2,
+          child: SvgPicture.asset(iconPath, height: 230),
         ),
-        Column(
-          children: [
-            Badge(
-              smallSize: 30,
-              largeSize: 30,
-              label: SvgPicture.asset(
-                'assets/icons/degree.svg',
-                width: 30,
+        Expanded(
+          child: Column(
+            children: [
+              Badge(
+                smallSize: 30,
+                largeSize: 30,
+                label: SvgPicture.asset(
+                  'assets/icons/degree.svg',
+                  width: 30,
+                ),
+                padding: const EdgeInsets.only(left: 30),
+                backgroundColor: Colors.transparent,
+                child: FittedBox(
+                  child: Text(
+                    degree,
+                    style: AppTextStyles.size86w700,
+                  ),
+                ),
               ),
-              padding: const EdgeInsets.only(left: 30),
-              backgroundColor: Colors.transparent,
-              child: Text(
-                degree,
-                style: AppTextStyles.size86w700,
+              FittedBox(
+                child: Text(
+                  degreeStatus,
+                  style: AppTextStyles.size28w400,
+                  maxLines: 2,
+                ),
               ),
-            ),
-            Text(
-              degreeStatus,
-              style: AppTextStyles.size28w400,
-            ),
-          ],
+            ],
+          ),
         ),
-        const Spacer(),
-        const SizedBox(width: 16),
+        const SizedBox(width: 46),
       ],
     );
   }

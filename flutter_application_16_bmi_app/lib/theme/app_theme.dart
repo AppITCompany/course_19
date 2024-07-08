@@ -5,6 +5,7 @@ final darkTheme = ThemeData(
     brightness: Brightness.dark,
     seedColor: Colors.white,
     primary: const Color(0xffFF0F65),
+    // ignore: deprecated_member_use
     background: const Color(0xff211834),
     surface: const Color(0xff0A001F),
     onSurface: Colors.white,
