@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_24_capital_game/components/custom_point_label.dart';
+import 'package:flutter_application_24_capital_game/home/game_page.dart';
 import 'package:flutter_application_24_capital_game/models/point_model.dart';
 import 'package:flutter_earth_globe/flutter_earth_globe.dart';
 import 'package:flutter_earth_globe/flutter_earth_globe_controller.dart';
@@ -37,26 +36,53 @@ class _HomePageState extends State<HomePage> {
           labelBuilder: (context, point, isHovering, isVisible) {
             return CustomPointLabel(
               label: continent.label,
-              onTap: () => log('OnTap ${continent.label}'),
+              onTap: () => Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const GamePage(),
+                ),
+              ),
             );
           },
         ),
       );
     }
+
+    _controller.onLoaded = () {
+      _controller.focusOnCoordinates(
+        const GlobeCoordinates(-0.736064, 79.626429),
+        animate: true,
+        duration: const Duration(seconds: 2),
+      );
+    };
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        title: const Text('Capital Game'),
-      ),
-      body: FlutterEarthGlobe(
-        controller: _controller,
-        radius: 100,
+      body: Stack(
+        children: [
+          FlutterEarthGlobe(
+            controller: _controller,
+            radius: 100,
+          ),
+          const Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: Text(
+                'Capital Game',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
