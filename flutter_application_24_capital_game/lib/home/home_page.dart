@@ -36,12 +36,20 @@ class _HomePageState extends State<HomePage> {
           labelBuilder: (context, point, isHovering, isVisible) {
             return CustomPointLabel(
               label: continent.label,
-              onTap: () => Navigator.push<void>(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const GamePage(),
-                ),
-              ),
+              onTap: () {
+                if (continent.questions.isNotEmpty) {
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => GamePage(continent.questions),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('The questions is empty')),
+                  );
+                }
+              },
             );
           },
         ),
