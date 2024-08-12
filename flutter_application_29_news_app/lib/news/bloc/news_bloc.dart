@@ -24,11 +24,17 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     Emitter<NewsState> emit,
   ) async {
     try {
+      final oldState = state;
+      if (oldState is NewsLoading) return;
+      if (oldState is NewsSuccess && oldState.countryCode == event.countryCode) return;
       emit(NewsLoading());
-      final response = await dio.get(apiPath('us'));
+      final response = await dio.get(apiPath(event.countryCode));
       if (response.statusCode == 200) {
         final data = NewModel.fromJson(response.data);
-        emit(NewsSuccess(data.articles));
+        emit(NewsSuccess(
+          news: data.articles,
+          countryCode: event.countryCode,
+        ));
       } else {
         final msj = 'GetNewsEvent Error status code'
             '${response.statusCode}\n message: ${response.data}';

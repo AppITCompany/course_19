@@ -8,9 +8,13 @@ final class NewsInitial extends NewsState {}
 final class NewsLoading extends NewsState {}
 
 final class NewsSuccess extends NewsState {
-  NewsSuccess(this.news);
+  NewsSuccess({
+    required this.countryCode,
+    required this.news,
+  });
 
   final List<Article> news;
+  final String countryCode;
 }
 
 final class NewsFailed extends NewsState {
