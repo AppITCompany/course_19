@@ -10,8 +10,10 @@
    k) json_annotation
    l) build_runner
    m) flutter_chat_ui
+   
 
 3) Backend Firebase
    a) firebase_auth
    b) cloud_firestore
+
 */
